@@ -5,8 +5,23 @@ namespace App\Http\Requests\Category;
 use Illuminate\Foundation\Http\FormRequest;
 
 
-class CategoryRequest extends FormRequest
+class StoreRequest extends FormRequest
 {
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'slug'=> Str($this->title)->slug()
+        ]);
+    }
+
+    static public function myRules()
+    {
+        return [
+            "title"       => "required|min:5|max:500",
+            "slug"        => "required|min:5|max:500|unique:posts"
+        ];
+    }
 
     /**
      * Determine if the user is authorized to make this request.
@@ -23,14 +38,6 @@ class CategoryRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            "title"       => "required|min:5|max:500",
-            "slug"        => "required|min:5|max:500|unique:posts,slug,".$this->route("post")->id,
-            "content"     => "required|min:7",
-            "category_id" => "required|integer",
-            "description" => "required|min:7",
-            "posted"      => "required",
-            "image"       => "mimes:jpeg, jpg, png|max:10240"
-        ];
+       return $this->myRules();
     }
 }
