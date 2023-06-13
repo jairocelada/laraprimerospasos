@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Dashnoard;
+namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
-use App\Http\Requests\Post\StoreRequest;
 use App\Http\Requests\Post\PutRequest;
+use App\Http\Requests\Post\StoreRequest;
 use App\Models\Category;
 use App\Models\Post;
 
